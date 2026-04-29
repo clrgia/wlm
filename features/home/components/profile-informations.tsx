@@ -9,10 +9,14 @@ export function ProfileInformations() {
   if (!profile) return <div>No profile found</div>;
 
   return (
-    <div>
-      <img src={profile.avatar_url} />
-      <h1>{profile.name}</h1>
-      <p>{profile.personal_message}</p>
+    <div className="border flex gap-2">
+      <div>
+        <img src={profile.avatar_url} width={100} />
+      </div>
+      <div>
+        <p className="font-bold">Username : {profile.name}</p>
+        <p>Personal Message : {profile.personal_message}</p>
+      </div>
     </div>
   );
 }

@@ -18,9 +18,9 @@ export function useProfile() {
       }
 
       const { data } = await supabase
-        .from("profile")
+        .from("profiles")
         .select("id, name, status, avatar_url, personal_message")
-        .eq("user", user.id)
+        .eq("user_id", user.id)
         .single();
 
       setProfile(data);
