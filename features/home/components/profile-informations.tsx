@@ -1,6 +1,9 @@
 "use client";
 
 import { useProfile } from "@/features/home/hooks/useProfile";
+import Dropdown, { DropdownItem } from "@/components/ui/dropdown";
+import { Avatar } from "./avatar";
+import { Name } from "./name";
 
 export function ProfileInformations() {
   const { profile, loading } = useProfile();
@@ -8,14 +11,20 @@ export function ProfileInformations() {
   if (loading) return <div>Loading...</div>;
   if (!profile) return <div>No profile found</div>;
 
+
   return (
-    <div className="border flex gap-2">
+    <div className="flex gap-4 mx-4 my-2">
       <div>
-        <img src={profile.avatar_url} width={100} />
+        <Avatar />
       </div>
       <div>
-        <p className="font-bold">Username : {profile.name}</p>
-        <p>Personal Message : {profile.personal_message}</p>
+        <Name/>
+        <div className="aerobutton flex gap-1 items-center">
+          <p>{profile.personal_message ?? "Sharing a quick message"}</p>
+          <div>
+            <img src={`/general/arrow.png`} width={7} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,5 @@ export default async function Home() {
   if (data.user) {
     redirect("/home");
   }
-
   redirect("/auth/login");
 }

@@ -41,10 +41,9 @@ export function useRealtimeMessages(conversationId: string) {
           event: "*",
           schema: "public",
           table: "messages",
-          filter: `conversation_id=eq.${conversationId}`, // ✅ filtre réactivé
+          filter: `conversation_id=eq.${conversationId}`,
         },
         (payload) => {
-          console.log("🔥 REALTIME:", payload);
           setMessages((prev) => {
             switch (payload.eventType) {
               case "INSERT":
@@ -70,7 +69,7 @@ export function useRealtimeMessages(conversationId: string) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [conversationId]); // ✅ supabase retiré des deps
+  }, [conversationId]);
 
   return { messages, setMessages };
 }

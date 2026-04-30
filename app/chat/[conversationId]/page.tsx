@@ -16,12 +16,10 @@ export default function Page({
   params: Promise<{ conversationId: string }>;
 }) {
   return (
-    <div className="flex w-full justify-center p-10">
-      <div className="w-full">
-        <Suspense fallback={null}>
-          <ChatRouteContent params={params} />
-        </Suspense>
-      </div>
+    <div className="w-full">
+      <Suspense fallback={null}>
+        <ChatRouteContent params={params} />
+      </Suspense>
     </div>
   );
 }

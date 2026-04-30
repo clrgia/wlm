@@ -3,21 +3,12 @@
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
-export function LogoutButton() {
+export function useLogout() {
   const router = useRouter();
 
-  const logout = async () => {
+  return async function logout() {
     const supabase = createClient();
     await supabase.auth.signOut();
     router.push("/auth/login");
   };
-
-  return (
-    <button
-      onClick={logout}
-      className="border p-1 inline-block mb-4 cursor-pointer"
-    >
-      Logout
-    </button>
-  );
 }
