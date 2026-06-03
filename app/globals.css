@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+.title {
+  font-size: 20px;
+  margin: 0 0 9px 0;
+  line-height: 1.75rem; 
+  color: #1D2F7F;
+}
+
+.link {
+  color: #0066cc;
+  :hover {
+  text-decoration: underline; 
+  cursor: pointer; 
+  }
+}
+
 .aerobutton {
   background-color: transparent;
   border: 2px solid transparent;
+  cursor: pointer;
 }
 .aerobutton:hover {
   border-image: url("/general/aerobutton_border.png") 2 round;
@@ -213,5 +229,6 @@ body {
 
 @layer base {
   * {
+    font-size : 12px;
   }
 }

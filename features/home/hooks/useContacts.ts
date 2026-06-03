@@ -19,6 +19,7 @@ export function useContacts() {
             status,
             category_id,
             categories ( id, name ),
+            favorite,
             user_profile:profiles!contacts_user_id_fkey(*),
             contact_profile:profiles!contacts_contact_id_fkey(*)
           `,

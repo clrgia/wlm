@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { Avatar } from "@/features/auth/components/avatar";
 
 export default function ContactInformations({
   conversationId,
@@ -72,10 +73,10 @@ export default function ContactInformations({
   return (
     <div className="border flex gap-2">
       <div>
-        <img src={contact.avatar_url} width={100} />
+        {Avatar(contact.avatar_url, contact.status)}
       </div>
       <div>
-        <p className="font-bold">Username : {contact.name}</p>
+        <p className="title">{contact.name}</p>
         <p>Personal Message : {contact.personal_message}</p>
       </div>
     </div>

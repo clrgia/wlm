@@ -19,23 +19,17 @@ export function Avatar() {
   if (!profile) return null;
 
   return (
-    <div>
-      <Image
-        className="relative mt-1 ml-1"
-        src={avatar}
-        alt="Avatar"
-        width={45}
-        height={45}
-        unoptimized
-      />
-      <Image
-        className="absolute top-0.5 ml-[-6]"
-        src={`/status/status_frame_${status}_small.png`}
-        alt={status}
-        width={65}
-        height={65}
-        unoptimized
-      />
-    </div>
+      <div className="h-[80px] w-[80px] relative ">
+        <img
+          className="absolute m-[7px] rounded-sm w-[52px]"
+          src={avatar}
+          alt="Avatar"
+        />
+        <img
+          className="absolute w-full h-full bottom-2 right-2"
+          src={`/status/status_frame_${status}_small.png`}
+          alt="Status Frame"
+        />
+      </div>
   );
 }

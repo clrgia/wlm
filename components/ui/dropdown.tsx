@@ -35,15 +35,14 @@ export default function Dropdown({
   }, []);
 
   return (
-    <div ref={ref} className="relative inline-block">
+    <div ref={ref} className="relative inline-block z-50">
       <div onClick={() => setOpen((v) => !v)} className="cursor-pointer">
         {trigger}
       </div>
 
       <div
         className={`
-          absolute 
-          ${align === "right" ? "right-0" : "left-0"}
+          absolute z-50
           bg-[#f9f9f9] border border-[#a0a0a0] dropdown-shadow
           min-w-[180px] py-1
           transition-all duration-[120ms] origin-top-left
@@ -59,8 +58,8 @@ export default function Dropdown({
             {item.dividerBefore && (
               <div className="h-px bg-[#e0e5ec] my-1 mx-2" />
             )}
-            <button
-              disabled={item.disabled}
+            <div
+              // disabled={item.disabled}
               onClick={() => {
                 if (!item.disabled) {
                   item.onClick?.();
@@ -80,7 +79,7 @@ export default function Dropdown({
                 {item.icon && <div className="ml-2">{item.icon}</div>}
               </div>
               {item.label}
-            </button>
+            </div>
           </div>
         ))}
       </div>

@@ -1,11 +1,13 @@
 "use client";
 
 import { useProfile } from "@/features/home/hooks/useProfile";
+import { useUpdateStatus } from "../hooks/useUpdateStatus";
 import Dropdown, { DropdownItem } from "@/components/ui/dropdown";
 import { useLogout } from "../hooks/useLogout";
 
 export function Name() {
   const logout = useLogout();
+  const { updateStatus } = useUpdateStatus("");
   const { profile, loading } = useProfile();
 
   if (loading) return <div>Loading...</div>;
@@ -14,35 +16,43 @@ export function Name() {
   const dropdownItems: DropdownItem[] = [
     {
       label: "Available",
-      onClick: () => {},
+      onClick: () => {
+        updateStatus("online");
+      },
       icon: <img src={`/status/online-dot.png`} width={8} />,
       dividerBefore: false,
       disabled: false,
     },
     {
       label: "Busy",
-      onClick: () => {},
+      onClick: () => {
+        updateStatus("busy");
+      },
       icon: <img src={`/status/busy-dot.png`} width={8} />,
       dividerBefore: false,
       disabled: false,
     },
     {
       label: "Away",
-      onClick: () => {},
+      onClick: () => {
+        updateStatus("away");
+      },
       icon: <img src={`/status/away-dot.png`} width={8} />,
       dividerBefore: false,
       disabled: false,
     },
     {
       label: "Appear offline",
-      onClick: logout,
+      onClick: () => {
+        updateStatus("offline");
+      },
       icon: <img src={`/status/offline-dot.png`} width={8} />,
       dividerBefore: false,
       disabled: false,
     },
     {
       label: "Sign out from here",
-      onClick: () => {},
+      onClick: logout,
       dividerBefore: true,
       disabled: false,
     },

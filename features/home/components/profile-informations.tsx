@@ -13,10 +13,8 @@ export function ProfileInformations() {
 
 
   return (
-    <div className="flex gap-4 mx-4 my-2">
-      <div>
+    <div className="flex mx-4 py-2">
         <Avatar />
-      </div>
       <div>
         <Name/>
         <div className="aerobutton flex gap-1 items-center">
