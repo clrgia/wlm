@@ -2,30 +2,27 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { Avatar } from "@/features/auth/components/avatar";
+import { useProfile } from "@/features/home/hooks/useProfile";
 
 export function MessageInput({ conversationId }: { conversationId: string }) {
   const supabase = createClient();
   const [text, setText] = useState("");
+  const { profile } = useProfile();
 
   const sendMessage = async () => {
     if (!text.trim()) return;
 
-    const { data: user } = await supabase.auth.getUser();
-    console.log("📨 sendMessage user:", user?.user?.id);
-
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("id")
-      .eq("user_id", user.user?.id)
-      .single();
-
-    console.log("📨 sendMessage profile:", profile);
+    if (!profile?.id) {
+      console.error("No connected profile found");
+      return;
+    }
 
     const { data, error } = await supabase
       .from("messages")
       .insert({
         conversation_id: conversationId,
-        sender_id: profile?.id,
+        sender_id: profile.id,
         content: text,
       })
       .select("*")
@@ -42,21 +39,21 @@ export function MessageInput({ conversationId }: { conversationId: string }) {
   };
 
   return (
-    <div className="flex gap-2 flex-col">
-      <textarea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-          }
-        }}
-        className="border w-full"
-      />
-      <button onClick={sendMessage} className="border p-4">
-        Send
-      </button>
+    <div className="flex gap-2 mb-12 mt-6 mr-6">
+      <div>{profile ? Avatar(profile.avatar_url, profile.status) : null}</div>
+      <div className="flex-1">
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
+          className="border w-full h-full"
+        />
+      </div>
     </div>
   );
 }

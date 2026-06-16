@@ -14,12 +14,18 @@ export default function ChatClient({
   if (!conversationId) return null;
 
   return (
-    <div>
-      <BackButton />
-      <ChatMenu />
-      <ContactInformations conversationId={conversationId} />
-      <Conversation conversationId={conversationId} />
-      <MessageInput conversationId={conversationId} />
+    <div className="h-screen flex flex-col overflow-hidden">
+      <div className="shrink-0">
+        <BackButton />
+        <ChatMenu />
+        <ContactInformations conversationId={conversationId} />
+      </div>
+      <div className="flex-1 min-h-0">
+        <Conversation conversationId={conversationId} />
+      </div>
+      <div className="shrink-0">
+        <MessageInput conversationId={conversationId} />
+      </div>
     </div>
   );
 }

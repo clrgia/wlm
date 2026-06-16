@@ -1,17 +1,19 @@
 import { NextPage } from "next";
 import Dropdown, { DropdownItem } from "@/components/ui/dropdown";
 import { useState, useRef, useEffect } from "react";
+import AddContactModal from "./add-contact-modal";
 
 interface Props {}
 
 const AddContact: NextPage<Props> = ({}) => {
   const [selectedValue, setSelectedValue] = useState("");
+  const [showAddContactModal, setShowAddContactModal] = useState(false);
 
   const dropdownItems: DropdownItem[] = [
     {
       label: "Add Contact...",
       onClick: () => {
-        // Handle add contact logic
+        setShowAddContactModal(true);
       },
       dividerBefore: false,
       disabled: false,
@@ -43,11 +45,11 @@ const AddContact: NextPage<Props> = ({}) => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex items-center h-full">
       <Dropdown
         trigger={
-          <div className="flex gap-1 items-center aerobutton p-1 ml-1 h-6">
-            <div className="w-5">
+          <div className="flex gap-1 items-center aerobutton p-1 cursor-pointer">
+            <div className="w-7">
               <img src={`/contacts/add_contact.png`} alt="" />
             </div>
             <div>
@@ -58,19 +60,22 @@ const AddContact: NextPage<Props> = ({}) => {
         items={dropdownItems}
         align="right"
       />
-      <div className="flex gap-1 items-center aerobutton pl-1 h-6">
-        <div className="w-5">
+      <div className="flex gap-1 items-center aerobutton p-1 cursor-pointer">
+        <div className="w-7">
           <img src={`/contacts/change_contact_list_layout.png`} alt="" />
         </div>
       </div>
-      <div className="flex gap-1 items-center aerobutton p-1 h-6">
-        <div className="w-5">
+      <div className="flex gap-1 items-center aerobutton p-1 cursor-pointer">
+        <div className="w-7">
           <img src={`/contacts/1489.png`} alt="" />
         </div>
         <div>
           <img src={`/general/arrow.png`} alt="" />
         </div>
       </div>
+      {showAddContactModal && (
+        <AddContactModal setShowAddContactModal={setShowAddContactModal} />
+      )}
     </div>
   );
 };

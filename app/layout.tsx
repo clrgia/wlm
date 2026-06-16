@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
+import { MessageSoundListener } from "@/components/message-sound-listener";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -9,13 +10,12 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "wlm"
+  title: "wlm",
 };
 
 const segoeUI = localFont({
-  src: '../public/fonts/SegoeUI.ttf',
+  src: "../public/fonts/SegoeUI.ttf",
 });
-
 
 export default function RootLayout({
   children,
@@ -31,6 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <MessageSoundListener />
           {children}
         </ThemeProvider>
       </body>

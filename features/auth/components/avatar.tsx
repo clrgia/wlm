@@ -5,7 +5,6 @@ export function Avatar(image:string, status:string) {
       <img
         className="absolute rounded-sm m-2 w-[8rem] h-[8rem]"
         src={
-          image ||
           `https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/usertiles/default.png`
         }
         alt="Avatar"
@@ -17,7 +16,7 @@ export function Avatar(image:string, status:string) {
             ? `https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/status/status_frame_${status}_large.png`
             : `https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/status/status_frame_offline_large.png`
         }
-        alt="Frame"
+        alt={`${status}`}
       />
     </div>
   );

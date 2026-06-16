@@ -24,14 +24,22 @@ export async function middleware(req: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isAuthPage = req.nextUrl.pathname.startsWith("/auth/login");
+  const isAuthPage = req.nextUrl.pathname.startsWith("/auth/");
+  const canVisitWithoutAuth =
+    req.nextUrl.pathname.startsWith("/auth/login") ||
+    req.nextUrl.pathname.startsWith("/auth/sign-up") ||
+    req.nextUrl.pathname.startsWith("/auth/forgot-password") ||
+    req.nextUrl.pathname.startsWith("/auth/update-password") ||
+    req.nextUrl.pathname.startsWith("/auth/error") ||
+    req.nextUrl.pathname.startsWith("/auth/sign-up-success") ||
+    req.nextUrl.pathname.startsWith("/auth/confirm");
 
-  if (!user && !isAuthPage) {
+  if (!user && !canVisitWithoutAuth) {
     return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 
   if (user && isAuthPage) {
-    return NextResponse.redirect(new URL("", req.url));
+    return NextResponse.redirect(new URL("/home", req.url));
   }
 
   return res;

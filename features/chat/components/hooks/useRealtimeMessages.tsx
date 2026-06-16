@@ -2,13 +2,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-export function useRealtimeMessages(conversationId: string) {
+export function useRealtimeMessages(
+  conversationId: string,
+  options?: {
+    onInsert?: (msg: any) => void;
+  },
+) {
   const [messages, setMessages] = useState<any[]>([]);
 
-  // ✅ Client stable — ne se recrée pas à chaque render
   const supabase = useMemo(() => createClient(), []);
 
-  // 🔹 1. FETCH INITIAL
   useEffect(() => {
     if (!conversationId) return;
 

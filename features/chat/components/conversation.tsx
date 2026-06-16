@@ -43,18 +43,20 @@ export function Conversation({ conversationId }: { conversationId: string }) {
     bottomRef.current?.scrollIntoView({ block: "end" });
   }, [messages, profilesMap]);
 
+
+
   return (
-    <div
-      className="border mt-4 mb-4 overflow-y-auto"
-      style={{ maxHeight: "500px" }}
-    >
-      {messages.map((msg) => (
-        <div key={msg.id} className="p-2 rounded flex gap-2">
-          <p>{profilesMap[msg.sender_id]} says:</p>
-          <p className="font-bold">{msg.content}</p>
-        </div>
-      ))}
-      <div ref={bottomRef} />
+    <div className="flex h-full min-h-0 gap-6">
+      <div className="w-[11rem] shrink-0" />
+      <div className="mt-4 mb-4 h-full min-h-0 w-full overflow-y-auto">
+        {messages.map((msg) => (
+          <div key={msg.id} className="p-2 gap-2">
+            <p>{profilesMap[msg.sender_id]} says:</p>
+            <p className="font-bold">• {msg.content}</p>
+          </div>
+        ))}
+        <div ref={bottomRef} />
+      </div>
     </div>
   );
 }

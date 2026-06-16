@@ -17,7 +17,7 @@ export default function Page() {
         }}
       >
         <ProfileInformations />
-        <div className="flex items-center">
+        <div className="flex items-center gap-2 h-9 mx-4">
           <Searchbar />
           <AddContact />
         </div>
