@@ -43,18 +43,32 @@ export function Conversation({ conversationId }: { conversationId: string }) {
     bottomRef.current?.scrollIntoView({ block: "end" });
   }, [messages, profilesMap]);
 
-
-
   return (
-    <div className="flex h-full min-h-0 gap-6">
-      <div className="w-[11rem] shrink-0" />
-      <div className="mt-4 mb-4 h-full min-h-0 w-full overflow-y-auto">
-        {messages.map((msg) => (
-          <div key={msg.id} className="p-2 gap-2">
-            <p>{profilesMap[msg.sender_id]} says:</p>
-            <p className="font-bold">• {msg.content}</p>
-          </div>
-        ))}
+    <div className="flex h-full min-h-0 gap-6 overflow-y-auto">
+      <div className="w-[13rem] shrink-0" />
+      <div className="w-full">
+        {messages.map((msg, index) => {
+          const previousMessage = messages[index - 1];
+          const shouldShowSenderLabel =
+            !previousMessage || previousMessage.sender_id !== msg.sender_id;
+
+          return (
+            <div key={msg.id} className="p-2 gap-2">
+              {shouldShowSenderLabel && (
+                <p className="opacity-70">{profilesMap[msg.sender_id]} says:</p>
+              )}
+              <div className="flex gap-2 items-baseline">
+                <div>
+                  <img
+                    src="https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/sign/others/message_dot.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8zZGU4ZTViOC04ZDVmLTQ1NTYtOTE2ZC1jMTFiNjA0NzhkMTkiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJvdGhlcnMvbWVzc2FnZV9kb3QucG5nIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MTcwNDQzOCwiZXhwIjo0OTM1MzA0NDM4fQ.WMTeldaHNIFa_yt9yQrdtHZ9f6BoTC8DeFFfSKYxKhk"
+                    alt="Message Dot"
+                  />
+                </div>
+                <p>{msg.content}</p>
+              </div>
+            </div>
+          );
+        })}
         <div ref={bottomRef} />
       </div>
     </div>

@@ -16,7 +16,7 @@ export default function ChatClient({
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <div className="shrink-0">
-        <BackButton />
+        <BackButton conversationId={conversationId} />
         <ChatMenu />
         <ContactInformations conversationId={conversationId} />
       </div>
