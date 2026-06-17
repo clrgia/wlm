@@ -1,34 +1,47 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export function useProfile() {
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+  const fetchProfile = useCallback(async () => {
+    setLoading(true);
 
-      if (!user) {
-        setLoading(false);
-        return;
-      }
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-      const { data } = await supabase
-        .from("profiles")
-        .select("id, name, status, avatar_url, personal_message")
-        .eq("user_id", user.id)
-        .single();
-
-      setProfile(data);
+    if (!user) {
+      setProfile(null);
       setLoading(false);
+      return;
+    }
+
+    const { data } = await supabase
+      .from("profiles")
+      .select("id, name, status, avatar_url, personal_message")
+      .eq("user_id", user.id)
+      .single();
+
+    setProfile(data);
+    setLoading(false);
+  }, [supabase]);
+
+  useEffect(() => {
+    fetchProfile();
+
+    const handleProfileChanged = () => {
+      fetchProfile();
     };
 
-    fetchProfile();
-  }, []);
+    window.addEventListener("profile:changed", handleProfileChanged);
+
+    return () => {
+      window.removeEventListener("profile:changed", handleProfileChanged);
+    };
+  }, [fetchProfile]);
 
   return { profile, loading };
 }
