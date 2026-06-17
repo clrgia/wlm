@@ -17,7 +17,7 @@ export function ProfileInformations() {
         <Avatar />
       <div>
         <Name/>
-        <div className="aerobutton flex gap-1 items-center">
+        <div className="aerobutton flex gap-2 items-center">
           <p>{profile.personal_message ?? "Sharing a quick message"}</p>
           <div>
             <img src={`/general/arrow.png`} width={7} />

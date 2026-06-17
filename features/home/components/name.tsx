@@ -5,10 +5,12 @@ import { useUpdateStatus } from "../hooks/useUpdateStatus";
 import Dropdown, { DropdownItem } from "@/components/ui/dropdown";
 import { useLogout } from "../hooks/useLogout";
 import { ChangeNameModal } from "@/features/home/components/change-name-modal";
+import { ChangePictureModal } from "@/features/home/components/change-picture-modal";
 import { useState } from "react";
 
 export function Name() {
   const [showChangeNameModal, setShowChangeNameModal] = useState(false);
+  const [showChangePictureModal, setShowChangePictureModal] = useState(false);
   const logout = useLogout();
   const { updateStatus } = useUpdateStatus("");
   const { profile, loading } = useProfile();
@@ -61,7 +63,7 @@ export function Name() {
     },
     {
       label: "Change display picture...",
-      onClick: () => {},
+      onClick: () => setShowChangePictureModal(true),
       dividerBefore: true,
       disabled: false,
     },
@@ -89,9 +91,9 @@ export function Name() {
     <>
       <Dropdown
         trigger={
-          <div className="aerobutton flex gap-1 items-center">
-            <p>{profile.name}</p>
-            <p className="capitalize">({profile.status})</p>
+          <div className="aerobutton flex gap-2 items-baseline mt-2.5">
+            <p className="text-[20px] my-[-5px]">{profile.name}</p>
+            <p>({profile.status})</p>
             <div>
               <img src={`/general/arrow.png`} width={7} />
             </div>
@@ -102,6 +104,9 @@ export function Name() {
       />
       {showChangeNameModal && (
         <ChangeNameModal setShowChangeNameModal={setShowChangeNameModal} />
+      )}
+      {showChangePictureModal && (
+        <ChangePictureModal setShowChangePictureModal={setShowChangePictureModal} />
       )}
     </>
   );

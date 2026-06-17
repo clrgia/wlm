@@ -3,7 +3,7 @@ export function Avatar(image:string, status:string) {
   return (
     <div className="h-[11rem] w-[11rem] flex items-center justify-center relative">
       <img
-        className="absolute rounded-sm m-2 w-[8rem] h-[8rem]"
+        className="absolute rounded-sm m-2 w-[8rem] h-[8rem] "
         src={image}
         alt="Avatar"
       />
