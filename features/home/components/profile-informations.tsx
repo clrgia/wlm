@@ -11,19 +11,21 @@ export function ProfileInformations() {
   if (loading) return <div>Loading...</div>;
   if (!profile) return <div>No profile found</div>;
 
-
   return (
-    <div className="flex mx-4 py-2">
+    <>
+      <div className="flex mx-4 py-2">
         <Avatar />
-      <div>
-        <Name/>
-        <div className="aerobutton flex gap-2 items-center">
-          <p>{profile.personal_message ?? "Sharing a quick message"}</p>
-          <div>
-            <img src={`/general/arrow.png`} width={7} />
+        <div>
+          <Name />
+          <div className="aerobutton flex gap-2 items-center">
+            <p className="glow">{profile.personal_message ?? "Sharing a quick message"}</p>
+            <div>
+              <img src={`/general/arrow.png`} width={7} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className="divider mb-2"></div>
+    </>
   );
 }

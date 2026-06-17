@@ -69,7 +69,7 @@ export default function ContactInformations({
   if (!contact) return <div>Loading...</div>;
 
   return (
-    <div className="pt-3 flex gap-2 bg-[url(https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/sign/backgrounds/background.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8zZGU4ZTViOC04ZDVmLTQ1NTYtOTE2ZC1jMTFiNjA0NzhkMTkiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJiYWNrZ3JvdW5kcy9iYWNrZ3JvdW5kLmpwZyIsImlhdCI6MTc4MDUwNzEzOCwiZXhwIjo0OTM0MTA3MTM4fQ.G_krLWkWAHd7-Mz5t7y85x0wsLxpQoQk2df9QC-ow4c)] bg-no-repeat bg-[length:100%_100px]">
+    <div className="pt-3 flex gap-2">
       <div className="mr-6 ml-9">
         {Avatar(contact.avatar_url, contact.status)}
       </div>

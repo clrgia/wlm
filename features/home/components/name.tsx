@@ -92,8 +92,8 @@ export function Name() {
       <Dropdown
         trigger={
           <div className="aerobutton flex gap-2 items-baseline mt-2.5">
-            <p className="text-[20px] my-[-5px]">{profile.name}</p>
-            <p>({profile.status})</p>
+            <p className="text-[20px] my-[-5px] glow">{profile.name}</p>
+            <p className="glow">({profile.status})</p>
             <div>
               <img src={`/general/arrow.png`} width={7} />
             </div>

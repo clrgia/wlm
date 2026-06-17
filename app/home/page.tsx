@@ -10,10 +10,10 @@ export default function Page() {
   return (
     <div className="flex min-h-svh flex-col justify-between">
       <div
-        className="bg-no-repeat bg-[length:100%_100px] h-[100px]"
+        className="bg-no-repeat bg-[length:100%_300px]"
         style={{
           backgroundImage:
-            "url(https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/scenes/default_background.jpg)",
+            "url(https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/sign/others/main_background.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8zZGU4ZTViOC04ZDVmLTQ1NTYtOTE2ZC1jMTFiNjA0NzhkMTkiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJvdGhlcnMvbWFpbl9iYWNrZ3JvdW5kLnBuZyIsInNjb3BlIjoiZG93bmxvYWQiLCJpYXQiOjE3ODE3MTE2MTQsImV4cCI6MTc5MDM1MTYxNH0.FI-nq8QDlgrC4ZU8rdkwPevujEZlonRAYcKL_vEPXeE)",
         }}
       >
         <ProfileInformations />

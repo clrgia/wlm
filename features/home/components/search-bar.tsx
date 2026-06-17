@@ -32,7 +32,7 @@ const Searchbar: NextPage<Props> = ({}) => {
 
   return (
     <input
-      className="p-1.5 border rounded-[4px] w-full searchbar bg-transparent text-[#6b8fa3]"
+      className="p-1.5 border border-[#6b8fa35d] rounded-[4px] w-full searchbar bg-white text-[#6b8fa3] bg-opacity-35 pl-4"
       ref={inputRef}
       type="text"
       value={isReset ? "" : value}
