@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { ContactRow } from "@/features/home/components/contact-row";
-import type { ContactItemType } from "@/features/home/components/contacts-list.types";
+
+type ContactItem = {
+  id: string;
+  contact_profile: {
+    id: string;
+    name: string;
+  };
+};
 
 type ContactAccordionProps = {
   title: string;
-  contacts: ContactItemType[];
+  contacts: ContactItem[];
   openConversation: (contactProfileId: string) => void;
   icon?: string;
   defaultOpen?: boolean;
