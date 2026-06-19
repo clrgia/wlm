@@ -108,7 +108,7 @@ export const ChangePictureModal: React.FC<Props> = ({ setShowChangePictureModal 
 
             <div className="mx-6 w-full">
               <div className="mb-14 flex justify-center">
-                {profile ? Avatar(selectedPicture, "offline") : null}
+                {profile ? <Avatar image={selectedPicture} /> : null}
               </div>
               <div className="win7 flex flex-col gap-0.5">
                 <button disabled>Webcam picture...</button>
