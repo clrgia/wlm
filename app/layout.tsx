@@ -27,7 +27,8 @@ export default function RootLayout({
       <body className={`${segoeUI.className} text-sm antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
+          forcedTheme="light"
           enableSystem
           disableTransitionOnChange
         >
