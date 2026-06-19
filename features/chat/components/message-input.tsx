@@ -80,7 +80,7 @@ export function MessageInput({ conversationId }: { conversationId: string }) {
   return (
     <div className="flex mb-12 mt-6 mr-6">
       <div className="mr-6 ml-9 mt-2 flex items-center">
-        {profile ? Avatar(profile.avatar_url, profile.status) : null}
+        {profile ? <Avatar image={profile.avatar_url} status={profile.status} /> : null}
       </div>
       {/* <div className="z-50 absolute left-[165px] bottom-[70px]">
         <img

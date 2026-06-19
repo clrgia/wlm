@@ -1,5 +1,9 @@
-export function Avatar(image:string, status:string) {
+type AvatarProps = {
+  image?: string;
+  status?: string;
+};
 
+export function Avatar({ image, status }: AvatarProps) {
   return (
     <div className="h-[11rem] w-[11rem] flex items-center justify-center relative">
       <img

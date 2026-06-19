@@ -71,7 +71,7 @@ export default function ContactInformations({
   return (
     <div className="pt-3 flex gap-2">
       <div className="mr-6 ml-9">
-        {Avatar(contact.avatar_url, contact.status)}
+        <Avatar image={contact.avatar_url} status={contact.status} />
       </div>
       <div>
         <div className="flex items-baseline gap-2 glow">
