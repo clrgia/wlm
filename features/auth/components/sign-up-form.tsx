@@ -40,7 +40,7 @@ export function SignUpForm({
         },
       });
       if (error) throw error;
-      router.push("/auth/sign-up-success");
+      router.push("/auth/home");
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -55,7 +55,7 @@ export function SignUpForm({
         <p className="mt-8 title">Sign up</p>
         <div className="flex gap-1">
           <p className="mb-4">
-            Create a new account with your Windows Live ID.
+            Create a new account with your Windows Live ID or
           </p>
           <Link href="/auth/login" className="link">
             Sign in.

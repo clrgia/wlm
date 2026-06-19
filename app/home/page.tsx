@@ -5,10 +5,11 @@ import { ContactsList } from "@/features/home/components/contacts-list";
 import Searchbar from "@/features/home/components/search-bar";
 import AddContact from "@/features/home/components/add-contact";
 import WhatsNew from "@/features/home/components/whats-new";
+import Footer from "@/features/home/components/footer";
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh flex-col justify-between">
+    <div className="flex min-h-svh flex-col justify-between bg-gradient-to-b from-white to-[#c5eaff] from-85% ">
       <div
         className="bg-no-repeat bg-[length:100%_300px]"
         style={{
@@ -23,7 +24,10 @@ export default function Page() {
         </div>
         <ContactsList />
       </div>
-      <WhatsNew />
+      <div>
+        <WhatsNew />
+        <Footer />
+      </div>
     </div>
   );
 }

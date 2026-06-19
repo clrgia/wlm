@@ -82,12 +82,12 @@ export function MessageInput({ conversationId }: { conversationId: string }) {
       <div className="mr-6 ml-9 mt-2 flex items-center">
         {profile ? Avatar(profile.avatar_url, profile.status) : null}
       </div>
-      <div className="z-50 absolute left-[165px] bottom-[70px]">
+      {/* <div className="z-50 absolute left-[165px] bottom-[70px]">
         <img
           src="https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/sign/others/chat_input_corner.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8zZGU4ZTViOC04ZDVmLTQ1NTYtOTE2ZC1jMTFiNjA0NzhkMTkiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJvdGhlcnMvY2hhdF9pbnB1dF9jb3JuZXIucG5nIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MTcwMDI3OCwiZXhwIjo0OTM1MzAwMjc4fQ.AjQxqcObD72OQ4z1LPnJE3mF72ij1kw2zCliW87PWm4"
           alt=""
         />
-      </div>
+      </div> */}
 
       <div>
         <div className="w-full">
@@ -108,7 +108,7 @@ export function MessageInput({ conversationId }: { conversationId: string }) {
             className="pointer-events-none mb-1"
           />
 
-          <input
+          <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
@@ -117,7 +117,7 @@ export function MessageInput({ conversationId }: { conversationId: string }) {
                 sendMessage();
               }
             }}
-            className="w-full border rounded-t-[4px] outline-none p-1 border-[#bdd5df] h-[8rem] bg-[#f6fcff]"
+            className="w-full border rounded-t-[4px] outline-none p-1 border-[#bdd5df] h-[8rem] bg-[#f6fcff] resize-none mb-[-5px]"
           />
 
           <div

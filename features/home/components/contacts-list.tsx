@@ -52,7 +52,7 @@ export function ContactsList() {
           title="Other Contacts"
           contacts={otherContacts}
           openConversation={openConversation}
-          defaultOpen={false}
+          defaultOpen={true}
         />
       )}
     </div>

@@ -6,8 +6,14 @@ import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Avatar } from "./avatar";
+
+const STORAGE_KEYS = {
+  email: "msn_remembered_email",
+  password: "msn_remembered_password",
+  autoSignIn: "msn_auto_signin",
+} as const;
 
 export function LoginForm({
   className,
@@ -24,7 +30,31 @@ export function LoginForm({
     Away: "away-dot.png",
     "Appear offline": "offline-dot.png",
   };
+
+  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberPassword, setRememberPassword] = useState(false);
+  const [signInAutomatically, setSignInAutomatically] = useState(false);
+
   const router = useRouter();
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem(STORAGE_KEYS.email);
+    const savedPassword = localStorage.getItem(STORAGE_KEYS.password);
+    const savedAutoSignIn = localStorage.getItem(STORAGE_KEYS.autoSignIn);
+
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+    if (savedPassword) {
+      setPassword(savedPassword);
+      setRememberPassword(true);
+      setRememberMe(true); // se souvenir du mdp implique forcément se souvenir de l'email
+    }
+    if (savedAutoSignIn === "true") {
+      setSignInAutomatically(true);
+    }
+  }, []);
 
   const dropdownItems: DropdownItem[] = [
     {
@@ -90,19 +120,34 @@ export function LoginForm({
       });
       if (error) throw error;
 
-      // Try to get the authenticated user id
       const { data: userData, error: getUserError } =
         await supabase.auth.getUser();
       const userId = userData?.user?.id ?? data?.user?.id ?? null;
 
       if (userId) {
-        // Update the profiles table with the selected status
         const { error: updateError } = await supabase
           .from("profiles")
           .update({ status: selectedStatus })
           .eq("id", userId);
         if (updateError)
           console.warn("Failed to update status:", updateError.message);
+      }
+
+      if (rememberPassword) {
+        localStorage.setItem(STORAGE_KEYS.email, email);
+        localStorage.setItem(STORAGE_KEYS.password, password);
+      } else if (rememberMe) {
+        localStorage.setItem(STORAGE_KEYS.email, email);
+        localStorage.removeItem(STORAGE_KEYS.password);
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.email);
+        localStorage.removeItem(STORAGE_KEYS.password);
+      }
+
+      if (signInAutomatically) {
+        localStorage.setItem(STORAGE_KEYS.autoSignIn, "true");
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.autoSignIn);
       }
 
       router.replace("/home");
@@ -113,6 +158,17 @@ export function LoginForm({
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className={cn("flex flex-col gap-6", className)} {...props}>
+        <div className="flex flex-col items-center pt-4">
+          <Avatar />
+          <p className="mt-8 title">Signing in...</p>
+          <img src="https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/sign/others/thinking.gif?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8zZGU4ZTViOC04ZDVmLTQ1NTYtOTE2ZC1jMTFiNjA0NzhkMTkiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJvdGhlcnMvdGhpbmtpbmcuZ2lmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MTcxNzE3MywiZXhwIjo0OTM1MzE3MTczfQ.RBeINYnDYXdPxQQ-2J0CMXG3-3rBR7-JPymzt5cI1Bs" />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center pt-4">
@@ -174,15 +230,40 @@ export function LoginForm({
 
               <div>
                 <div className="mt-2">
-                  <input type="checkbox" id="rememberme" />
+                  <input
+                    type="checkbox"
+                    id="rememberme"
+                    checked={rememberMe}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      setRememberMe(checked);
+                      // Si on décoche "remember me", ça n'a plus de sens de garder le mdp
+                      if (!checked) setRememberPassword(false);
+                    }}
+                  />
                   <label htmlFor="rememberme">Remember me</label>
                 </div>
                 <div className="mt-2">
-                  <input type="checkbox" id="rememberpassword" />
+                  <input
+                    type="checkbox"
+                    id="rememberpassword"
+                    checked={rememberPassword}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      setRememberPassword(checked);
+                      // Se souvenir du mdp implique se souvenir de l'email
+                      if (checked) setRememberMe(true);
+                    }}
+                  />
                   <label htmlFor="rememberpassword">Remember my password</label>
                 </div>
                 <div className="mt-2">
-                  <input type="checkbox" id="signinautomatically" />
+                  <input
+                    type="checkbox"
+                    id="signinautomatically"
+                    checked={signInAutomatically}
+                    onChange={(e) => setSignInAutomatically(e.target.checked)}
+                  />
                   <label htmlFor="signinautomatically">
                     Sign me in automatically
                   </label>

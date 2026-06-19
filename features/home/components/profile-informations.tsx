@@ -13,19 +13,28 @@ export function ProfileInformations() {
 
   return (
     <>
-      <div className="flex mx-4 py-2">
-        <Avatar />
-        <div>
-          <Name />
-          <div className="aerobutton flex gap-2 items-center">
-            <p className="glow">{profile.personal_message ?? "Sharing a quick message"}</p>
-            <div>
-              <img src={`/general/arrow.png`} width={7} />
+      <div className="flex justify-between items-end">
+        <div className="flex mx-4 py-2">
+          <Avatar />
+          <div>
+            <Name />
+            <div className="aerobutton flex gap-2 items-center w-fit">
+              <p className="glow">
+                {profile.personal_message !== ""
+                  ? profile.personal_message
+                  : "Sharing a quick message"}
+              </p>
+              <div>
+                <img src={`/general/arrow.png`} width={7} />
+              </div>
             </div>
           </div>
         </div>
+        <div className="w-12 h-12 m-2 aerobutton">
+          <img src="https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/icons/hotmail.png" />
+        </div>
       </div>
-      <div className="divider mb-2"></div>
+      <div className="divider-blurry mb-2"></div>
     </>
   );
 }

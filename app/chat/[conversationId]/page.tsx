@@ -16,7 +16,7 @@ export default function Page({
   params: Promise<{ conversationId: string }>;
 }) {
   return (
-    <div className="w-full">
+    <div className="bg-gradient-to-b from-white to-[#c5eaff] from-85%">
       <Suspense fallback={null}>
         <ChatRouteContent params={params} />
       </Suspense>

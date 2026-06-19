@@ -41,13 +41,7 @@ const WhatsNew = () => {
 
   return (
     <div className="px-4 pb-11">
-      <div className="w-full">
-        <img
-          src={`/general/divider.png`}
-          alt=""
-          className="mix-blend-multiply"
-        />
-      </div>
+      <div className="divider-blurry" />
       <div className="flex gap-1 pt-2 items-center">
         <p className="text-[16px] text-[#1D2F7F]">What's new</p>
         <div
