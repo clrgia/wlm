@@ -38,7 +38,7 @@ export function ForgotPasswordForm({
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center pt-4">
-        <Avatar/>
+        <Avatar />
         <p className="mt-8 title">Reset Your Password</p>
         <div className="mt-2 w-[22rem] win7">
           <fieldset>
