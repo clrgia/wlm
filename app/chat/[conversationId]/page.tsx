@@ -1,25 +1,21 @@
 import ChatClient from "@/features/chat/components/chat-client";
-import { Suspense } from "react";
 
 async function ChatRouteContent({
   params,
 }: {
-  params: Promise<{ conversationId: string }>;
+  params: { conversationId: string };
 }) {
-  const { conversationId } = await params;
-  return <ChatClient conversationId={conversationId} />;
+  return <ChatClient conversationId={params.conversationId} />;
 }
 
 export default function Page({
   params,
 }: {
-  params: Promise<{ conversationId: string }>;
+  params: { conversationId: string };
 }) {
   return (
     <div className="bg-gradient-to-b from-white to-[#c5eaff] from-85%">
-      <Suspense fallback={null}>
-        <ChatRouteContent params={params} />
-      </Suspense>
+      <ChatRouteContent params={params} />
     </div>
   );
 }
