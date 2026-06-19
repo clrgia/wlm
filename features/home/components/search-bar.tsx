@@ -5,18 +5,19 @@ const initialValue = "Search contacts or the web...";
 
 interface Props {}
 
-const Searchbar: NextPage<Props> = ({}) => {
+const Searchbar: NextPage<Props> = () => {
   const [value, setValue] = useState(initialValue);
   const [isReset, setIsReset] = useState(false);
-  const inputRef = useRef(null);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleInputClick = () => {
     setIsReset(true);
     setValue("");
   };
 
-  const handleClickOutside = (event: any) => {
-    if (inputRef.current && !inputRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
       setIsReset(false);
       setValue(initialValue);
     }
@@ -24,7 +25,6 @@ const Searchbar: NextPage<Props> = ({}) => {
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
