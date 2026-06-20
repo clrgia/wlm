@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
 import { MessageSoundListener } from "@/components/message-sound-listener";
+import { Notification } from "@/features/notification/components/notification";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -33,7 +34,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <MessageSoundListener />
+          <Notification />
           {children}
+          
         </ThemeProvider>
       </body>
     </html>

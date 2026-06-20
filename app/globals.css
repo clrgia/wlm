@@ -9,6 +9,10 @@
   color: #1D2F7F;
 }
 
+.notification-background {
+  background-image: "url(https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/others/notification.png)",
+}
+
 .divider-blurry {
     height: 2px;
     width: 100%;
@@ -285,6 +289,6 @@ body {
 
 @layer base {
   * {
-    font-size : 13px;
+    font-size : 12px;
   }
 }

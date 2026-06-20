@@ -59,7 +59,8 @@ export function LoginForm({
   const dropdownItems: DropdownItem[] = [
     {
       label: "Available",
-      onClick: () => setSelectedStatus("Available"),
+      value: "online",
+      onClick: () => setSelectedStatus("online"),
       icon: (
         <img
           src={`https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/status/online-dot.png`}
@@ -71,7 +72,8 @@ export function LoginForm({
     },
     {
       label: "Busy",
-      onClick: () => setSelectedStatus("Busy"),
+      value: "busy",
+      onClick: () => setSelectedStatus("busy"),
       icon: (
         <img
           src={`https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/status/busy-dot.png`}
@@ -83,7 +85,8 @@ export function LoginForm({
     },
     {
       label: "Away",
-      onClick: () => setSelectedStatus("Away"),
+      value: "away",
+      onClick: () => setSelectedStatus("away"),
       icon: (
         <img
           src={`https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/status/away-dot.png`}
@@ -95,7 +98,8 @@ export function LoginForm({
     },
     {
       label: "Appear offline",
-      onClick: () => setSelectedStatus("Appear offline"),
+      value: "offline",
+      onClick: () => setSelectedStatus("offline"),
       icon: (
         <img
           src={`https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/status/offline-dot.png`}
@@ -217,9 +221,19 @@ export function LoginForm({
                         width={8}
                         className="mx-2"
                       />
-                      <p>{selectedStatus}</p>
+                      <p>
+                        {" "}
+                        {
+                          dropdownItems.find(
+                            (item) => item.value === selectedStatus,
+                          )?.label
+                        }
+                      </p>
                       <div>
-                        <img src={`/general/arrow.png`} width={7} />
+                        <img
+                          src="https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/public/icons/arrow.png"
+                          width={7}
+                        />
                       </div>
                     </div>
                   }

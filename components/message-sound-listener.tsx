@@ -25,9 +25,7 @@ export function MessageSoundListener() {
 
     const loadUser = async () => {
       const { data } = await supabase.auth.getUser();
-
       if (!isMounted) return;
-
       setUserId(data.user?.id ?? null);
     };
 
@@ -63,10 +61,7 @@ export function MessageSoundListener() {
       if (!isMounted) return;
 
       if (error) {
-        console.error(
-          "Failed to load current profile for sound listener:",
-          error,
-        );
+        console.error("Failed to load current profile for sound listener:", error);
         setProfileId(null);
         return;
       }
@@ -76,9 +71,7 @@ export function MessageSoundListener() {
 
     loadProfile();
 
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false; };
   }, [supabase, userId]);
 
   useEffect(() => {
@@ -89,25 +82,19 @@ export function MessageSoundListener() {
         audioRef.current = new Audio("/sounds/type.mp3");
         audioRef.current.volume = 0.8;
       }
-
       audioRef.current.currentTime = 0;
+      audioRef.current.play();
     };
 
     const channel = supabase
       .channel("global-message-sounds")
       .on(
         "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "messages",
-        },
+        { event: "INSERT", schema: "public", table: "messages" },
         async (payload) => {
           const message = payload.new as MessageRow;
 
-          if (!message?.conversation_id || message.sender_id === profileId) {
-            return;
-          }
+          if (!message?.conversation_id || message.sender_id === profileId) return;
 
           const { data: conversation, error } = await supabase
             .from("conversations")
@@ -115,24 +102,17 @@ export function MessageSoundListener() {
             .eq("id", message.conversation_id)
             .maybeSingle();
 
-          if (error || !conversation) {
-            return;
-          }
+          if (error || !conversation) return;
 
           const convo = conversation as ConversationRow;
-
-          if (convo.profile_1 !== profileId && convo.profile_2 !== profileId) {
-            return;
-          }
+          if (convo.profile_1 !== profileId && convo.profile_2 !== profileId) return;
 
           playMessageSound();
         },
       )
       .subscribe();
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    return () => { supabase.removeChannel(channel); };
   }, [supabase, profileId]);
 
   return null;

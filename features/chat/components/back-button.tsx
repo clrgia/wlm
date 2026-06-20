@@ -14,11 +14,6 @@ export function BackButton({ conversationId }: { conversationId: string }) {
         `/api/chat/contact-email?conversationId=${encodeURIComponent(conversationId)}`,
       );
 
-      if (!response.ok) {
-        console.error("Failed to fetch contact email");
-        return;
-      }
-
       const data = (await response.json()) as { email?: string | null };
       setContactEmail(data.email ?? null);
     };

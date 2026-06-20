@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, ReactNode } from "react";
 
 export interface DropdownItem {
   label: string;
+  value: string;
   onClick?: () => void;
   icon?: ReactNode;
   dividerBefore?: boolean;
