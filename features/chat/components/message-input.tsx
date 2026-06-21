@@ -10,7 +10,7 @@ import { NudgeButton } from "@/features/chat/components/nudge-button";
 import { FontSelector } from "@/features/chat/components/font-selector";
 import { BackgroundSelector } from "@/features/chat/components/background-selector";
 
-export function MessageInput({ conversationId }: { conversationId: string }) {
+export function MessageInput({ conversationId, onNudge }: { conversationId: string; onNudge?: () => void }) {
   const supabase = createClient();
   const [text, setText] = useState("");
   const [lastMessageTime, setLastMessageTime] = useState<string | null>(null);
@@ -128,7 +128,7 @@ export function MessageInput({ conversationId }: { conversationId: string }) {
           >
             {EmoticonSelector()}
             {WinkSelector()}
-            {NudgeButton()}
+            {NudgeButton({ onNudge })}
             <div className="px-2">
               <img
                 src="https://wxactkxxweinaigcwvkw.supabase.co/storage/v1/object/sign/others/chat_icons_separator.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8zZGU4ZTViOC04ZDVmLTQ1NTYtOTE2ZC1jMTFiNjA0NzhkMTkiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJvdGhlcnMvY2hhdF9pY29uc19zZXBhcmF0b3IucG5nIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MTY5ODg5MCwiZXhwIjo0OTM1Mjk4ODkwfQ.B3vhvr_UszAn1KM8yHZrOwj8_AXYxeAagmrgk2ZHYM8"

@@ -23,12 +23,12 @@ export function LoginForm({
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState<string>("Available");
+  const [selectedStatus, setSelectedStatus] = useState<string>("online");
   const statusMap: Record<string, string> = {
-    Available: "online-dot.png",
-    Busy: "busy-dot.png",
-    Away: "away-dot.png",
-    "Appear offline": "offline-dot.png",
+    online: "online-dot.png",
+    busy: "busy-dot.png",
+    away: "away-dot.png",
+    offline: "offline-dot.png",
   };
 
   const [rememberMe, setRememberMe] = useState(false);

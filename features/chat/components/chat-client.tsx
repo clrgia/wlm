@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import ContactInformations from "@/features/chat/components/contact-informations";
 import ChatMenu from "@/features/chat/components/chat-menu";
 import { Conversation } from "@/features/chat/components/conversation";
@@ -11,10 +12,17 @@ export default function ChatClient({
 }: {
   conversationId: string;
 }) {
+  const [shaking, setShaking] = useState(false);
+
+  const handleNudge = () => {
+    setShaking(true);
+    setTimeout(() => setShaking(false), 500);
+  };
+
   if (!conversationId) return null;
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className={`h-screen flex flex-col overflow-hidden${shaking ? " nudge" : ""}`}>
       <BackButton conversationId={conversationId} />
       <ChatMenu />
       <div
@@ -27,7 +35,7 @@ export default function ChatClient({
         <ContactInformations conversationId={conversationId} />
 
         <Conversation conversationId={conversationId} />
-        <MessageInput conversationId={conversationId} />
+        <MessageInput conversationId={conversationId} onNudge={handleNudge} />
       </div>
     </div>
   );
